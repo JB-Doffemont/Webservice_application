@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "allowedCorsOrigin",
+    "type": "java.lang.String",
+    "description": "A description for 'allowedCorsOrigin'"
+  },
+  {
+    "name": "spring.allowedCorsOrigin",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.allowedCorsOrigin'"
+  },
+  {
+    "name": "spring.datasource.scan-packages",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.scan-packages'"
+  }
+]}
