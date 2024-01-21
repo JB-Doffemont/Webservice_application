@@ -3,6 +3,7 @@ package com.example.fisherfans.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.fisherfans.dto.BoatDto;
@@ -25,6 +26,12 @@ public class BoatController {
     @GetMapping("/{id}")
     public Boat getBoat(@PathVariable("id") Long id) {
         return boatService.findBoatById(id);
+    }
+
+    @GetMapping("/paginated")
+    public Page<Boat> getBoats(@RequestParam("page") int page,
+            @RequestParam("size") int size) {
+        return this.boatService.getBoatsByPage(page, size);
     }
 
     @PostMapping("")
