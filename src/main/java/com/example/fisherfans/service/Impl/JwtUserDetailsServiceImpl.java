@@ -1,4 +1,4 @@
-package com.example.fisherfans.service;
+package com.example.fisherfans.service.Impl;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import com.example.fisherfans.entity.User;
 import com.example.fisherfans.repository.UserRepository;
 
 @Service
-public class JwtUserDetailsService implements UserDetailsService {
+public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -30,8 +30,6 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public User getUserByUsername(String username) {
-        System.out.println(username);
-        System.out.println("//////////////////////////////////////////////////////////////////");
         return userRepository.findByUsername(username);
     }
 

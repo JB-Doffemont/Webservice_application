@@ -1,5 +1,4 @@
-package com.example.fisherfans.service;
-
+package com.example.fisherfans.service.Impl;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -11,7 +10,7 @@ import com.example.fisherfans.entity.ConfirmationToken;
 import com.example.fisherfans.repository.ConfirmationTokenRepository;
 
 @Service
-public class ConfirmationTokenService {
+public class ConfirmationTokenServiceImpl {
 
     @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;

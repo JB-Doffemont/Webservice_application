@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.fisherfans.dto.UserDto;
 import com.example.fisherfans.entity.User;
-import com.example.fisherfans.service.UserService;
+import com.example.fisherfans.service.Impl.UserServiceImpl;
 
 @RestController
 @RequestMapping("/users")
@@ -15,7 +15,7 @@ import com.example.fisherfans.service.UserService;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    UserServiceImpl userService;
 
     @GetMapping("")
     public List<User> getUsers() {

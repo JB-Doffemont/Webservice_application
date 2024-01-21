@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.fisherfans.dto.ReservationDto;
 import com.example.fisherfans.entity.Reservation;
-import com.example.fisherfans.service.ReservationService;
+import com.example.fisherfans.service.Impl.ReservationServiceImpl;
 
 @RestController
 @CrossOrigin
@@ -15,7 +15,7 @@ import com.example.fisherfans.service.ReservationService;
 public class ReservationController {
 
     @Autowired
-    ReservationService reservationService;
+    ReservationServiceImpl reservationService;
 
     @GetMapping("")
     public List<Reservation> getReservations() {

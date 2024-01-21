@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.fisherfans.dto.BoatDto;
 import com.example.fisherfans.entity.Boat;
-import com.example.fisherfans.service.BoatService;
+import com.example.fisherfans.service.Impl.BoatServiceImpl;
 
 @RestController
 @CrossOrigin
@@ -16,7 +16,7 @@ import com.example.fisherfans.service.BoatService;
 public class BoatController {
 
     @Autowired
-    BoatService boatService;
+    BoatServiceImpl boatService;
 
     @GetMapping("")
     public List<Boat> getBoats() {

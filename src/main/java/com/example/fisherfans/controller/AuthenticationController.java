@@ -16,7 +16,7 @@ import com.example.fisherfans.entity.User;
 import com.example.fisherfans.jwt.JwtRequest;
 import com.example.fisherfans.jwt.JwtResponse;
 import com.example.fisherfans.jwt.JwtTokenManager;
-import com.example.fisherfans.service.JwtUserDetailsService;
+import com.example.fisherfans.service.Impl.JwtUserDetailsServiceImpl;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AuthenticationController {
 
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private JwtUserDetailsServiceImpl userDetailsService;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired

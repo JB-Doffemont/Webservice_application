@@ -10,8 +10,8 @@ import com.example.fisherfans.entity.ConfirmationToken;
 import com.example.fisherfans.entity.Password;
 import com.example.fisherfans.entity.User;
 import com.example.fisherfans.repository.UserRepository;
-import com.example.fisherfans.service.ConfirmationTokenService;
-import com.example.fisherfans.service.UserService;
+import com.example.fisherfans.service.Impl.ConfirmationTokenServiceImpl;
+import com.example.fisherfans.service.Impl.UserServiceImpl;
 
 import java.util.regex.Pattern;
 import java.time.LocalDateTime;
@@ -24,9 +24,9 @@ public class RegistrationService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private ConfirmationTokenService confirmationTokenService;
+    private ConfirmationTokenServiceImpl confirmationTokenService;
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     // Utilisation de constantes pour les messages d'erreur
     private static final String EMAIL_ALREADY_USED = "Email déjà utilisé";
@@ -90,26 +90,26 @@ public class RegistrationService {
             ConfirmationToken confirmationToken = confirmationTokenService
                     .getToken(token)
                     .orElseThrow(() -> new IllegalStateException("Token not found for: " + token));
-    
+
             if (confirmationToken.getConfirmedAt() != null) {
                 throw new IllegalStateException("Email already confirmed");
             }
-    
+
             LocalDateTime expiredAt = confirmationToken.getExpiresAt();
-    
+
             if (expiredAt.isBefore(LocalDateTime.now())) {
                 throw new IllegalStateException("Token expired");
             }
-    
+
             User user = confirmationToken.getUser();
             user.setEnabled(true);
             confirmationToken.setConfirmedAt(LocalDateTime.now());
-            userRepository.save(user);  
+            userRepository.save(user);
             return user.isEnabled();
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
             throw e;
         }
     }
-    
+
 }

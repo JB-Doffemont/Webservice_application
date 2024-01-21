@@ -10,7 +10,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.example.fisherfans.service.JwtUserDetailsService;
+import com.example.fisherfans.service.Impl.JwtUserDetailsServiceImpl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUserDetailsService userDetailsService;
+    private JwtUserDetailsServiceImpl userDetailsService;
     @Autowired
     private JwtTokenManager tokenManager;
 

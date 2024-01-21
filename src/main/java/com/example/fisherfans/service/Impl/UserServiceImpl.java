@@ -1,4 +1,4 @@
-package com.example.fisherfans.service;
+package com.example.fisherfans.service.Impl;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ import com.example.fisherfans.repository.UserRepository;
 import jakarta.mail.MessagingException;
 
 @Service
-public class UserService {
+public class UserServiceImpl {
 
     @Autowired
     private UserRepository userRepository;
@@ -35,7 +35,7 @@ public class UserService {
     private PasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private ConfirmationTokenService confirmationTokenService;
+    private ConfirmationTokenServiceImpl confirmationTokenService;
 
     @Autowired
     private GmailAPIService gmailAPIService;

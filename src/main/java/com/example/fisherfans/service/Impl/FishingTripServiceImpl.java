@@ -1,4 +1,4 @@
-package com.example.fisherfans.service;
+package com.example.fisherfans.service.Impl;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.example.fisherfans.mapper.FishingTripMapper;
 import com.example.fisherfans.repository.FishingTripRepository;
 
 @Service
-public class FishingTripService {
+public class FishingTripServiceImpl {
 
     @Autowired
     FishingTripRepository fishingTripRepository;
