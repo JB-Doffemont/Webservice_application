@@ -41,5 +41,5 @@ public class FishingTripDto {
 
     private BoatDto boat;
 
-    private UserDto owner;
+    private UserDto ownerDto;
 }

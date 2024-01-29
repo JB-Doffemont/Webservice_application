@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.example.fisherfans.entity.FishingLog;
-import com.example.fisherfans.entity.Password;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -56,11 +56,10 @@ public class UserDto {
 
     private String commerceRegisterNumber;
 
-    private Password password;
-
     private List<String> roles;
 
-    private Collection<BoatDto> boats;
+    @JsonManagedReference
+    private List<BoatDto> boats;
 
     private Collection<FishingTripDto> fishingTrips;
 

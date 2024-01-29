@@ -40,6 +40,9 @@ public class UserServiceImpl {
     @Autowired
     private GmailAPIService gmailAPIService;
 
+    @Autowired
+    UserMapper userMapper;
+
     public List<User> getUsers() {
         return userRepository.findAll();
     }
@@ -77,7 +80,7 @@ public class UserServiceImpl {
     }
 
     public User updateUser(UserDto userDto) {
-        User user = UserMapper.INSTANCE.dtoToEntity(userDto);
+        User user = userMapper.dtoToEntity(userDto);
         return userRepository.save(user);
     }
 

@@ -11,21 +11,21 @@ import com.example.fisherfans.entity.Boat;
 @Service
 public interface BoatService {
 
-    public List<Boat> getBoats();
+    public List<BoatDto> getBoats();
 
-    public Boat findBoatById(Long id);
+    public BoatDto findBoatById(Long id);
 
-    public Boat createBoat(BoatDto boatDTO);
+    public BoatDto createBoat(BoatDto boatDTO);
 
-    public Boat updateBoat(BoatDto boatDto, Long id);
+    public BoatDto updateBoat(BoatDto boatDto, Long id);
 
     public void deleteBoat(Long id);
 
-    public List<Boat> getBoatsByNumberOfBerths(Long numberOfBerths);
+    public List<BoatDto> getBoatsByNumberOfBerths(Long numberOfBerths);
 
-    public List<Boat> getBoatsByLocalisation(Double minLatitude, Double minLongitude, Double maxLatitude,
+    public List<BoatDto> getBoatsByLocalisation(Double minLatitude, Double minLongitude, Double maxLatitude,
             Double maxLongitude);
 
-    public Page<Boat> getBoatsByPage(int pageNumber, int pageSize);
+    public Page<BoatDto> getBoatsByPage(int pageNumber, int pageSize);
 
 }

@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -121,19 +124,21 @@ public class User {
     private List<String> roles;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Password password;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    Collection<Reservation> reservations;
+    List<Reservation> reservations;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    Collection<FishingTrip> fishingTrips;
+    List<FishingTrip> fishingTrips;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    Collection<Boat> boats;
+    @JsonManagedReference
+    List<Boat> boats;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
-    Collection<FishingLog> fishingLogs;
+    List<FishingLog> fishingLogs;
 
     // Statut (particulier | professionnel)
     public enum UserType {

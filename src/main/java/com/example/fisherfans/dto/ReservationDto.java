@@ -23,6 +23,6 @@ public class ReservationDto {
 
     private FishingTripDto fishingTrip;
 
-    private UserDto owner;
+    private UserDto ownerDto;
 
 }

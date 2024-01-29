@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -27,60 +28,65 @@ public class BoatServiceImpl implements BoatService {
     @Autowired
     BoatRepository boatRepository;
 
+    @Autowired
     BoatMapper boatMapper;
 
     @Autowired
     UserRepository userRepository;
 
-    public List<Boat> getBoats() {
-        return boatRepository.findAll();
+    public List<BoatDto> getBoats() {
+        return boatMapper.entitiesToDtos(boatRepository.findAll());
     }
 
-    public Boat findBoatById(Long id) {
-        return boatRepository.findById(id).orElse(null);
+    public BoatDto findBoatById(Long id) {
+        BoatDto boatDto = boatMapper.entityToDto(boatRepository.findById(id).orElse(null));
+        return boatDto;
     }
 
-    public Page<Boat> getBoatsByPage(int pageNumber, int pageSize) {
+    public Page<BoatDto> getBoatsByPage(int pageNumber, int pageSize) {
         try {
-            ResponseEntity.ok("Boats found by page");
-            return boatRepository.findAll(PageRequest.of(pageNumber, pageSize));
+            Page<Boat> boatPage = boatRepository.findAll(PageRequest.of(pageNumber, pageSize));
+            List<BoatDto> boatDtos = boatMapper.entitiesToDtos(boatPage.getContent());
+
+            return new PageImpl<>(boatDtos, PageRequest.of(pageNumber, pageSize), boatPage.getTotalElements());
         } catch (Exception e) {
             throw new BoatServiceException("Error retrieving boats by page", e);
         }
     }
 
-    public Boat createBoat(BoatDto boatDTO) {
+    public BoatDto createBoat(BoatDto boatDTO) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         User user = userRepository.findByUsername(currentPrincipalName);
 
         if (user.getBoatingLicenseNumber() != null) {
 
-            Boat boat = BoatMapper.INSTANCE.dtoToEntity(boatDTO);
+            Boat boat = boatMapper.dtoToEntity(boatDTO);
             boat.setOwner(user);
-            return boatRepository.save(boat);
+            return boatMapper.entityToDto(boatRepository.save(boat));
         } else {
             return null;
         }
     }
 
-    public Boat updateBoat(BoatDto boatDto, Long id) {
+    public BoatDto updateBoat(BoatDto boatDto, Long id) {
         Boat boat = boatRepository.findById(id).orElse(null);
-        BoatMapper.INSTANCE.updateEntityFromBoatDto(boatDto, boat);
-        return boatRepository.save(boat);
+        boatMapper.updateEntityFromBoatDto(boatDto, boat);
+        return boatMapper.entityToDto(boatRepository.save(boat));
     }
 
     public void deleteBoat(Long id) {
         boatRepository.deleteById(id);
     }
 
-    public List<Boat> getBoatsByNumberOfBerths(Long numberOfBerths) {
-        return boatRepository.findBoatsByNumberOfBerths(numberOfBerths);
+    public List<BoatDto> getBoatsByNumberOfBerths(Long numberOfBerths) {
+        return boatMapper.entitiesToDtos(boatRepository.findBoatsByNumberOfBerths(numberOfBerths));
     }
 
-    public List<Boat> getBoatsByLocalisation(Double minLatitude, Double minLongitude, Double maxLatitude,
+    public List<BoatDto> getBoatsByLocalisation(Double minLatitude, Double minLongitude, Double maxLatitude,
             Double maxLongitude) {
-        return boatRepository.findBoatsByLocalisation(minLatitude, minLongitude, maxLatitude, maxLongitude);
+        return boatMapper.entitiesToDtos(
+                boatRepository.findBoatsByLocalisation(minLatitude, minLongitude, maxLatitude, maxLongitude));
     }
 
     // Custom Exception for Boat Service Errors

@@ -31,6 +31,6 @@ public class FishingLogDto {
 
     private String fishReleased;
 
-    private UserDto owner;
+    private UserDto ownerDto;
 
 }

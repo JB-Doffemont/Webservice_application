@@ -7,18 +7,17 @@ import com.example.fisherfans.entity.Boat;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
-public interface BoatMapper extends GenericMapper<Boat, BoatDto> {
+@Mapper(componentModel = "spring", uses = { UserMapper.class })
+public interface BoatMapper {
 
-    BoatMapper INSTANCE = Mappers.getMapper(BoatMapper.class);
-
-    // @Mapping(target = "owner", ignore = true)
+    @Mapping(source = "owner", target = "ownerDto")
     BoatDto entityToDto(Boat boat);
 
+    @Mapping(source = "ownerDto", target = "owner")
     Boat dtoToEntity(BoatDto boatDto);
 
     List<BoatDto> entitiesToDtos(List<Boat> boatList);
@@ -26,6 +25,7 @@ public interface BoatMapper extends GenericMapper<Boat, BoatDto> {
     List<Boat> dtosToEntities(List<BoatDto> boatDtoList);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(source = "ownerDto", target = "owner")
     public void updateEntityFromBoatDto(BoatDto boatDto, @MappingTarget Boat boat);
 
 }

@@ -6,6 +6,7 @@ import com.example.fisherfans.entity.Boat.BoatType;
 import com.example.fisherfans.entity.Boat.EquipmentType;
 import com.example.fisherfans.entity.Boat.LicenseType;
 import com.example.fisherfans.entity.Boat.MotorType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.Data;
 
@@ -46,6 +47,7 @@ public class BoatDto {
 
     private Integer enginePower;
 
-    private UserDto owner;
+    @JsonBackReference
+    private UserDto ownerDto;
 
 }
